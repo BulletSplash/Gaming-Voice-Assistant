@@ -1,8 +1,8 @@
 ﻿using System.IO;
 using System.Windows;
 using Gaming_Voice_Assistant.Data;
-using Microsoft.Data.SqlClient;
-using Gaming_Voice_Assistant.Models;
+using System.Speech.Synthesis;
+using System.Speech.Recognition;
 
 namespace Gaming_Voice_Assistant
 {
@@ -10,9 +10,12 @@ namespace Gaming_Voice_Assistant
     {
         private LanguageDictionaryContext context = new LanguageDictionaryContext();
 
+        private SpeechSynthesizer synthesizer = new SpeechSynthesizer();
+        private SpeechRecognitionEngine sreMain = new SpeechRecognitionEngine();
+
         public MainWindow()
         {
-            InitializeComponent();  
+            InitializeComponent();
             Initialize();
         }
 
@@ -38,6 +41,42 @@ namespace Gaming_Voice_Assistant
             }
         }
 
+        private void Start()
+        {
+            Choices choices = new Choices();
+
+            var commands = from command in context.Commands
+                           select command.CMD;
+
+            choices.Add(commands.ToArray());
+
+            Grammar grammar = new Grammar(new GrammarBuilder(choices));
+
+            try
+            {
+                sreMain.LoadGrammar(grammar);
+                sreMain.RequestRecognizerUpdate();
+                sreMain.SpeechRecognized -= Sre_SpeechRecognized;
+                sreMain.SpeechRecognized += Sre_SpeechRecognized;
+                sreMain.SetInputToDefaultAudioDevice();
+                sreMain.RecognizeAsync(RecognizeMode.Multiple);
+            }
+            catch
+            {
+                return;
+            }
+        }
+
+        private void Sre_SpeechRecognized(object? sender, SpeechRecognizedEventArgs e)
+        {
+            Speak(e.Result.Text);
+        }
+
+        private void Speak(string phrases)
+        {
+            synthesizer.Speak(phrases);
+        }
+
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             MessageBoxResult result = MessageBox.Show("Are you sure you want to exit? ", "Exit Confirmation", MessageBoxButton.YesNo);
@@ -46,6 +85,20 @@ namespace Gaming_Voice_Assistant
             {
                 e.Cancel = true;
             }
+        }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            var commands = from command in context.Commands
+                           select new
+                           {
+                               command.CMD,
+                               command.RESPONSE,
+                               command.EXECPATH
+                           };
+            dataGrid1.ItemsSource = commands.ToList();
+
+            Start();
         }
     }
 }

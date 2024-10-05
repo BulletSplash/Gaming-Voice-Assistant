@@ -6,8 +6,28 @@
         xmlns:local="clr-namespace:Gaming_Voice_Assistant"
         mc:Ignorable="d"
         Closing="Window_Closing"
+        Loaded="Window_Loaded"
         WindowStartupLocation="CenterScreen"
         Title="MainWindow" Height="450" Width="800">
-    <Grid Background="#FF21233A"/>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="60"/>
+            <RowDefinition />
+            <RowDefinition Height="20"/>
+        </Grid.RowDefinitions>
+        
+        <!-- Menu bar --> 
+        <Grid Grid.Row="0">
+
+        </Grid>
+        <!-- Content pane -->
+        <Grid Grid.Row="1" Background="#070626">
+            <DataGrid Name="dataGrid1" Margin="10,115,10,18" IsReadOnly="True"/>
+        </Grid>
+        <!-- Footer -->
+        <Grid Grid.Row="2" Background="#02010f">
+
+        </Grid>
+    </Grid>
 </Window>
  
