@@ -5,28 +5,64 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Gaming_Voice_Assistant"
         mc:Ignorable="d"
-        Closing="Window_Closing"
-        Loaded="Window_Loaded"
+        Title="MainWindow"
+        Height="740"
+        Width="1220"
         WindowStartupLocation="CenterScreen"
-        Title="MainWindow" Height="450" Width="800">
+        WindowStyle="None"
+        ResizeMode="NoResize"
+        Background="Transparent"
+        AllowsTransparency="True"
+        Closing="Window_Closing">
+
     <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="60"/>
-            <RowDefinition />
-            <RowDefinition Height="20"/>
-        </Grid.RowDefinitions>
-        
-        <!-- Menu bar --> 
-        <Grid Grid.Row="0">
+        <Border Background="#1c1d31" CornerRadius="25"/>
 
-        </Grid>
-        <!-- Content pane -->
-        <Grid Grid.Row="1" Background="#070626">
-            <DataGrid Name="dataGrid1" Margin="10,115,10,18" IsReadOnly="True"/>
-        </Grid>
-        <!-- Footer -->
-        <Grid Grid.Row="2" Background="#02010f">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width=".4*"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height=".1*"/>
+                <RowDefinition Height=".6*"/>
+                <RowDefinition Height=".1*"/>
+            </Grid.RowDefinitions>
 
+            <StackPanel Grid.Row="1">
+                <RadioButton Content="Home"
+                             Height="80"
+                             Foreground="White"
+                             FontSize="30"
+                             Style="{StaticResource MenuButtonTheme}"
+                             IsChecked="True"/>
+                <RadioButton Content="Commands"
+                             Height="80"
+                             Foreground="White"
+                             FontSize="30"
+                             Style="{StaticResource MenuButtonTheme}"/>
+                <RadioButton Content="Settings"
+                             Height="80"
+                             Foreground="White"
+                             FontSize="30"
+                             Style="{StaticResource MenuButtonTheme}"/>
+            </StackPanel>
+
+            <Button Grid.Column="1"
+                       Background="Transparent"
+                       Foreground="DarkRed"
+                       FontSize="30"
+                       HorizontalAlignment="Right"
+                       VerticalAlignment="Center"
+                       Margin="0,0,20,0"
+                       Click="OnExitItem_Click"
+                       BorderThickness="0">
+                <Image Source="/shutdown.png"
+                       RenderOptions.BitmapScalingMode="Fant"
+                       Width="32"
+                       Height="32"/>
+            </Button>
+            
         </Grid>
     </Grid>
 </Window>

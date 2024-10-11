@@ -3,6 +3,7 @@ using System.Windows;
 using Gaming_Voice_Assistant.Data;
 using System.Speech.Synthesis;
 using System.Speech.Recognition;
+using Gaming_Voice_Assistant.Models;
 
 namespace Gaming_Voice_Assistant
 {
@@ -89,16 +90,25 @@ namespace Gaming_Voice_Assistant
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            var commands = from command in context.Commands
+            UpdateDataGrid();
+            Start();
+        }
+
+        private void UpdateDataGrid()
+        {
+/*            var commands = from command in context.Commands
                            select new
                            {
                                command.CMD,
                                command.RESPONSE,
                                command.EXECPATH
                            };
-            dataGrid1.ItemsSource = commands.ToList();
+            dataGrid1.ItemsSource = commands.ToList();*/
+        }
 
-            Start();
+        private void OnExitItem_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
         }
     }
 }
