@@ -8,7 +8,7 @@ namespace Gaming_Voice_Assistant.Data
         public DbSet<Command> Commands { get; set; } = null!;
 
         //Release_String
-        //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) => optionsBuilder.UseSqlServer($@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=""{Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData)}\LB\GVA\Command_Dictionary.mdf"";Integrated Security=True");
+        /*        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) => optionsBuilder.UseSqlServer($@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=""{Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData)}\LB\GVA\Command_Dictionary.mdf"";Integrated Security=True");*/
 
         //Local_String
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) => optionsBuilder.UseSqlServer(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=""C:\Users\blasc\source\repos\Gaming Voice Assistant\Data\Command_Dictionary.mdf"";Integrated Security=True");

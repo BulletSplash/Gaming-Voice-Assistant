@@ -66,6 +66,8 @@ namespace Gaming_Voice_Assistant
             {
                 return;
             }
+
+            Console.WriteLine(ContentPage.Content.ToString());
         }
 
         private void Sre_SpeechRecognized(object? sender, SpeechRecognizedEventArgs e)

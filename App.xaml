@@ -2,12 +2,24 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:Gaming_Voice_Assistant"
+             xmlns:viewModel="clr-namespace:Gaming_Voice_Assistant.ViewModel"
+             xmlns:view="clr-namespace:Gaming_Voice_Assistant.View"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="Theme/MenuButtonTheme.xaml"/>
+                <ResourceDictionary Source="Theme/ExitButtonTheme.xaml"/>
             </ResourceDictionary.MergedDictionaries>
+            
+            <DataTemplate DataType="{x:Type viewModel:CustomizationViewModel}">
+                <view:Customization/>
+            </DataTemplate>
+            
+            <DataTemplate DataType="{x:Type viewModel:CommandsViewModel}">
+                <view:Commands/>
+            </DataTemplate>
+            
         </ResourceDictionary>
     </Application.Resources>
 </Application>

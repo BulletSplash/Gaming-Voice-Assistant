@@ -4,10 +4,12 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Gaming_Voice_Assistant"
+        xmlns:viewModel="clr-namespace:Gaming_Voice_Assistant.ViewModel"
+        xmlns:tb="http://www.hardcodet.net/taskbar"
         mc:Ignorable="d"
         Title="MainWindow"
-        Height="740"
-        Width="1220"
+        Height="720"
+        Width="1080"
         WindowStartupLocation="CenterScreen"
         WindowStyle="None"
         ResizeMode="NoResize"
@@ -15,55 +17,90 @@
         AllowsTransparency="True"
         Closing="Window_Closing">
 
-    <Grid>
-        <Border Background="#1c1d31" CornerRadius="25"/>
+    <Window.DataContext>
+        <viewModel:MainViewModel/>
+    </Window.DataContext>
 
+
+    <Border Background="#1c1d31" CornerRadius="25">
         <Grid>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width=".4*"/>
-                <ColumnDefinition/>
-            </Grid.ColumnDefinitions>
-            <Grid.RowDefinitions>
-                <RowDefinition Height=".1*"/>
-                <RowDefinition Height=".6*"/>
-                <RowDefinition Height=".1*"/>
-            </Grid.RowDefinitions>
+            <tb:TaskbarIcon IconSource="/Images/shutdown_off.png"
+                    ToolTipText="hello world"
+                    Visibility="Hidden">
+                <tb:TaskbarIcon.ContextMenu>
+                    <ContextMenu>
+                        <MenuItem Header="Show"/>
+                        <MenuItem Header="Exit" Click="OnExitItem_Click"/>
+                    </ContextMenu>
+                </tb:TaskbarIcon.ContextMenu>
+            </tb:TaskbarIcon>
 
-            <StackPanel Grid.Row="1">
-                <RadioButton Content="Home"
-                             Height="80"
-                             Foreground="White"
-                             FontSize="30"
-                             Style="{StaticResource MenuButtonTheme}"
-                             IsChecked="True"/>
-                <RadioButton Content="Commands"
-                             Height="80"
-                             Foreground="White"
-                             FontSize="30"
-                             Style="{StaticResource MenuButtonTheme}"/>
-                <RadioButton Content="Settings"
-                             Height="80"
-                             Foreground="White"
-                             FontSize="30"
-                             Style="{StaticResource MenuButtonTheme}"/>
+            <StackPanel Orientation="Horizontal"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top">
+                <Image Source="/Images/Controller.png"
+               Width="90"
+               Height="90"
+               Margin="10,0,0,0"/>
+                <TextBlock Text="GAMING &#x0a;VOICE ASSISTANT"
+                   Foreground="White"
+                   FontSize="30"
+                   Height="90"
+                   Margin="10,10,0,0"
+                   FontFamily="Times New Roman"/>
             </StackPanel>
 
-            <Button Grid.Column="1"
-                       Background="Transparent"
-                       Foreground="DarkRed"
-                       FontSize="30"
-                       HorizontalAlignment="Right"
-                       VerticalAlignment="Center"
-                       Margin="0,0,20,0"
-                       Click="OnExitItem_Click"
-                       BorderThickness="0">
-                <Image Source="/shutdown.png"
-                       RenderOptions.BitmapScalingMode="Fant"
-                       Width="32"
-                       Height="32"/>
-            </Button>
-            
+
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition Width="771.429"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height=".1*"/>
+                    <RowDefinition Height=".6*"/>
+                </Grid.RowDefinitions>
+
+                <StackPanel Grid.Row="1">
+                    <RadioButton Content="Customization"
+                         Height="80"
+                         Foreground="White"
+                         FontSize="30"
+                         Style="{StaticResource MenuButtonTheme}"
+                         IsChecked="True"
+                         Command="{Binding CustomizationViewCommand}"/>
+                    <RadioButton Content="Commands" 
+                         Height="80"
+                         Foreground="White"
+                         FontSize="30"
+                         Style="{StaticResource MenuButtonTheme}"
+                         Command="{Binding CommandsViewCommand}"/>
+                </StackPanel>
+
+                <Button Grid.Column="1"
+                   FontSize="30"
+                   Click="OnExitItem_Click"
+                   Style="{StaticResource ExitButtonTheme}">
+                </Button>
+
+                <Border Grid.Row="1" 
+                        Background="#120f24"
+                        CornerRadius="25"
+                        Grid.Column="1" Margin="385,0,0,0"/>
+                <Border Grid.Row="1" 
+                        Background="#120f24"
+                        Grid.Column="1" Margin="0,0,0,309"/>
+                <Border Grid.Row="1" 
+                        Background="#120f24"
+                        Grid.Column="1" Margin="0,257,321,0"/>        
+
+                <ContentControl x:Name="ContentPage" Grid.Row="1"
+                        Grid.Column="1"
+                        Panel.ZIndex="1"
+                        Margin="10"
+                        Content="{Binding CurrentView}"/>
+            </Grid>
         </Grid>
-    </Grid>
+    </Border>
 </Window>
  

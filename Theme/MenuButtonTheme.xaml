@@ -19,7 +19,8 @@
                                        Text="{TemplateBinding Property=Content}"
                                        HorizontalAlignment="Left"
                                        VerticalAlignment="Center"
-                                       Margin="5, 0, 0, 0"/>
+                                       Margin="5, 0, 0, 0"
+                                       FontFamily="Times New Roman"/>
 
                             <Border x:Name="border"
                                     HorizontalAlignment="Left"
